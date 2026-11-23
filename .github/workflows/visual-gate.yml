@@ -1,0 +1,63 @@
+name: Dinoverse Visual Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/visual-gate.yml'
+      - 'project.godot'
+      - 'scenes/**'
+      - 'scripts/**'
+      - 'shaders/**'
+      - 'tools/**'
+      - 'docs/**'
+      - 'README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  godot-import-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch production visual assets
+        run: python tools/fetch_visual_assets.py
+
+      - name: Set up Godot 4.7.1
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.1
+          use-dotnet: false
+
+      - name: Verify Godot version
+        run: godot --version
+
+      - name: Import project resources
+        run: godot --headless --editor --path . --quit
+
+      - name: Run startup scene smoke test
+        run: godot --headless --path . --quit-after 8
+
+      - name: Package Godot project with visual assets
+        run: |
+          mkdir -p dist
+          zip -r dist/Dinoverse_Godot_4.7.1_Visual_Assets.zip \
+            project.godot scenes scripts shaders assets docs README.md \
+            -x '*/.godot/*'
+
+      - name: Upload verified project package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dinoverse-Godot-4.7.1-Visual-Assets
+          path: dist/Dinoverse_Godot_4.7.1_Visual_Assets.zip
+          if-no-files-found: error
+          retention-days: 30
