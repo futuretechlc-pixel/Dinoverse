@@ -12,6 +12,15 @@ on:
       - 'tools/**'
       - 'docs/**'
       - 'README.md'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'project.godot'
+      - 'scenes/**'
+      - 'scripts/**'
+      - 'tools/**'
+      - 'docs/**'
+      - 'README.md'
   workflow_dispatch:
 
 permissions:
