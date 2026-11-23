@@ -38,6 +38,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Check asset bootstrap syntax
+        run: python -m py_compile tools/fetch_visual_assets.py
+
       - name: Fetch production visual assets
         run: python tools/fetch_visual_assets.py
 
@@ -56,17 +59,22 @@ jobs:
       - name: Run startup scene smoke test
         run: godot --headless --path . --quit-after 8
 
-      - name: Package Godot project with visual assets
+      - name: Write visual gate report
+        if: always()
         run: |
           mkdir -p dist
-          zip -r dist/Dinoverse_Godot_4.7.1_Visual_Assets.zip \
-            project.godot scenes scripts shaders assets docs README.md \
-            -x '*/.godot/*'
+          {
+            echo "Dinoverse Visual Gate"
+            echo "Godot: $(godot --version || true)"
+            echo "Downloaded GLB assets:"
+            find assets -name '*.glb' -type f -printf '%P %s bytes\n' 2>/dev/null | sort
+          } > dist/visual-gate-report.txt
 
-      - name: Upload verified project package
+      - name: Upload validation report (no source mesh redistribution)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Dinoverse-Godot-4.7.1-Visual-Assets
-          path: dist/Dinoverse_Godot_4.7.1_Visual_Assets.zip
+          name: Dinoverse-Visual-Gate-Report
+          path: dist/visual-gate-report.txt
           if-no-files-found: error
           retention-days: 30
