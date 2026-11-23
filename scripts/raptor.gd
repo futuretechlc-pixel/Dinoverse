@@ -72,30 +72,30 @@ func build_body() -> void:
         sphere(self, "Pupil", Vector3(side * 0.25, 2.31, -1.615), Vector3(0.035, 0.07, 0.025), dark_skin)
         sphere(self, "Nostril", Vector3(side * 0.16, 2.17, -2.03), Vector3(0.035, 0.026, 0.025), dark_skin)
         sphere(self, "Shoulder", Vector3(side * 0.39, 1.78, -0.72), Vector3(0.23, 0.25, 0.30), skin)
-        arm := capsule(self, "Forearm", Vector3(side * 0.49, 1.58, -0.92), 0.095, 0.48, light_skin)
+        var arm := capsule(self, "Forearm", Vector3(side * 0.49, 1.58, -0.92), 0.095, 0.48, light_skin)
         arm.rotation.z = side * deg_to_rad(-32)
         for finger in range(2):
             sphere(self, "Hand_Claw", Vector3(side * (0.55 + finger * 0.055), 1.39, -1.06), Vector3(0.035, 0.045, 0.14), claw_mat)
-        thigh := capsule(self, "Thigh", Vector3(side * 0.34, 0.91, 0.48), 0.22, 0.78, skin)
+        var thigh := capsule(self, "Thigh", Vector3(side * 0.34, 0.91, 0.48), 0.22, 0.78, skin)
         thigh.rotation.x = deg_to_rad(-18)
-        shin := capsule(self, "Shin", Vector3(side * 0.34, 0.47, 0.22), 0.115, 0.66, light_skin)
+        var shin := capsule(self, "Shin", Vector3(side * 0.34, 0.47, 0.22), 0.115, 0.66, light_skin)
         shin.rotation.x = deg_to_rad(20)
-        foot := sphere(self, "Three_Toed_Foot", Vector3(side * 0.34, 0.15, -0.02), Vector3(0.22, 0.12, 0.38), skin)
+        var foot := sphere(self, "Three_Toed_Foot", Vector3(side * 0.34, 0.15, -0.02), Vector3(0.22, 0.12, 0.38), skin)
         for toe in range(3):
             sphere(self, "Toe_Claw", Vector3(side * 0.34 + (toe - 1) * 0.12, 0.12, -0.24), Vector3(0.055, 0.055, 0.19), claw_mat)
         parts["leg_%s" % side] = {"thigh": thigh, "shin": shin, "foot": foot}
-    tail := Node3D.new()
+    var tail := Node3D.new()
     tail.name = "Tail_Root_Pivot"
     tail.position = Vector3(0, 1.35, 0.94)
     add_child(tail)
     parts.tail = tail
     for i in range(6):
-        p := float(i)
-        segment := sphere(tail, "Tail_Segment_%d" % i, Vector3(0, -p * 0.035, 0.25 + p * 0.31), Vector3(0.48 - p * 0.052, 0.42 - p * 0.045, 0.66), skin if i < 3 else light_skin)
+        var p := float(i)
+        var segment := sphere(tail, "Tail_Segment_%d" % i, Vector3(0, -p * 0.035, 0.25 + p * 0.31), Vector3(0.48 - p * 0.052, 0.42 - p * 0.045, 0.66), skin if i < 3 else light_skin)
         segment.rotation.x = deg_to_rad(-8)
     for i in range(7):
-        z := -0.82 + i * 0.27
-        ridge := sphere(self, "Dorsal_Scute", Vector3(0, 1.92 - i * 0.045, z), Vector3(0.12, 0.18, 0.13), light_skin)
+        var z := -0.82 + i * 0.27
+        var ridge := sphere(self, "Dorsal_Scute", Vector3(0, 1.92 - i * 0.045, z), Vector3(0.12, 0.18, 0.13), light_skin)
         ridge.rotation.x = deg_to_rad(25)
 
 func _process(delta: float) -> void:
@@ -103,7 +103,7 @@ func _process(delta: float) -> void:
     stride += delta * 5.2
     moving = global_position.distance_to(last_position) > 0.002
     last_position = global_position
-    gait := sin(stride) if moving else 0.0
+    var gait := sin(stride) if moving else 0.0
     parts.tail.rotation.y = sin(clock * 1.45) * 0.12 + gait * 0.035
     parts.tail.rotation.x = sin(clock * 1.1) * 0.035
     for side in [-1.0, 1.0]:
