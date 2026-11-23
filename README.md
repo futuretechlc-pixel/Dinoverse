@@ -1,25 +1,38 @@
-# Dinoverse | Godot 4.7.1 Visual Foundation
+# Dinoverse | Godot 4.7.1
 
-The production engine is now **Godot 4.7.1**. This repository contains the first native Godot visual-foundation pass for the Emerald Jungle.
+Dinoverse is a stylized 3D dinosaur action-adventure for PC and mobile. The approved first vertical slice is **Emerald Jungle**, with a third-person explorer and a Velociraptor companion. Visual quality and animation are the current production priority.
 
-## Current visual foundation
-- Stylized jungle composition with layered canopy clusters, tree trunks/branches, fern understory, mossy ground forms, riverbank stones and ancient ruins.
-- Filmic environment setup, warm directional sunlight with cascaded shadows, green bounce fill, atmospheric fog and restrained glow.
-- Procedural Velociraptor companion with articulated body sections, head/neck, tail segments, limbs, toes, claws and amber eyes.
-- Explorer placeholder, third-person follow camera, mouse orbit, WASD movement and sprint.
-- Animated water shader with moving wave displacement and specular highlights.
+## Visual asset setup
 
-## Run
-1. Install Godot **4.7.1**.
-2. Import this folder in the Godot Project Manager.
-3. Open `project.godot` and run the main scene.
+The project now uses real GLB assets instead of presenting primitive blockouts as final characters. Before opening the project for the first time, run:
 
-Controls: WASD/arrows move, Shift sprint, hold right mouse and drag to orbit, Esc releases the mouse.
+```bash
+python tools/fetch_visual_assets.py
+```
 
-## Quality status
-This is a visual improvement over the previous browser blockout, but it is **not final production art**. The dinosaur and explorer remain procedural stand-ins. Production assets still require authored meshes, UVs, PBR texture sets, a proper skeleton, high-quality animation clips, foot IK and facial rigging.
+This downloads the Velociraptor and three tropical environment models into `assets/`. Then open `project.godot` with **Godot 4.7.1** and let the editor import the GLB files.
 
-## Validation limitation
-The current execution environment does not include the Godot editor/runtime. No editor import, runtime screenshot, Android export or FPS result is claimed. The first Godot 4.7.1 editor run is required to validate parser/import warnings and visual output.
+The bootstrap sources are free for commercial game use. Read `docs/ASSET_LICENSES.md` before redistributing the raw meshes.
 
-See [docs/ART_QUALITY_GATE.md](docs/ART_QUALITY_GATE.md) for the non-negotiable visual and animation acceptance criteria.
+## Controls
+
+- `WASD`: move
+- `Shift`: sprint
+- Hold right mouse button and drag: orbit camera
+- `Esc`: release mouse capture
+
+## Current visual implementation
+
+- Real GLB Velociraptor mesh with 3,938 triangles and named articulated pivots.
+- Runtime controller blends idle, walk, and run motion through the model's neck, head, jaw, tail, arms, and hind-leg pivots.
+- Bite, roar, and hit action hooks are available to gameplay code.
+- Tropical GLB environment assets are fetched by the same bootstrap script and scattered through Emerald Jungle.
+- Existing Godot environment, water shader, ruins, camera, and explorer foundation remain in place.
+
+## Important quality boundary
+
+The downloaded Velociraptor is a lightweight stylized gameplay asset, not a cinematic hero model. Its parts are articulated pivots rather than a skinned deformation skeleton, and the current animation controller is procedural. It replaces the primitive placeholder, but it does **not** yet satisfy the final hero-character gate for authored skeletal animation, secondary motion, and high-detail close-up presentation. That remaining gate is documented in `docs/ART_QUALITY_GATE.md`.
+
+## Validation
+
+The GitHub Actions workflow **Dinoverse Visual Gate** downloads the GLB assets, imports the project in Godot 4.7.1 headless mode, runs a startup smoke test, and packages the project as an artifact. A workflow pass is the first actual engine-side validation; local source edits alone are not treated as a successful build.
