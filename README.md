@@ -10,7 +10,7 @@ The project now uses real GLB assets instead of presenting primitive blockouts a
 python tools/fetch_visual_assets.py
 ```
 
-This downloads the Velociraptor and three tropical environment models into `assets/`. Then open `project.godot` with **Godot 4.7.1** and let the editor import the GLB files.
+This downloads the Velociraptor and eight tropical environment models into `assets/`. Then open `project.godot` with **Godot 4.7.1** and let the editor import the GLB files.
 
 The bootstrap sources are free for commercial game use. Read `docs/ASSET_LICENSES.md` before redistributing the raw meshes.
 
