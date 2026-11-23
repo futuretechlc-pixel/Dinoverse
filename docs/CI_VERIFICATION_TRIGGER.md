@@ -1,0 +1,1 @@
+Temporary verification change for the Godot visual asset CI workflow. This file is safe to keep as a project QA record.
