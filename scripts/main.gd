@@ -213,6 +213,51 @@ func build_glb_forest() -> void:
             sapling.scale = Vector3.ONE * rng.randf_range(0.75, 1.35)
             sapling.rotation.y = rng.randf_range(0.0, TAU)
             add_child(sapling)
+    var fern_scene := load("res://assets/environment/fern.glb") as PackedScene
+    var bush_scene := load("res://assets/environment/round_bush.glb") as PackedScene
+    var small_rock_scene := load("res://assets/environment/small_rock.glb") as PackedScene
+    var medium_rock_scene := load("res://assets/environment/medium_rock.glb") as PackedScene
+    var grass_scene := load("res://assets/environment/grass_tuft.glb") as PackedScene
+    var understory_scenes: Array[PackedScene] = [fern_scene, bush_scene]
+    for i in range(54):
+        var x := rng.randf_range(-26.0, 26.0)
+        var z := rng.randf_range(-25.0, 24.0)
+        if Vector2(x, z).length() < 5.5 or (absf(z + 12.0) < 4.8 and absf(x) < 19.0):
+            continue
+        var source: PackedScene = understory_scenes[rng.randi_range(0, understory_scenes.size() - 1)]
+        var plant := source.instantiate() as Node3D
+        if plant == null:
+            continue
+        plant.position = Vector3(x, 0.0, z)
+        plant.scale = Vector3.ONE * rng.randf_range(0.72, 1.35)
+        plant.rotation.y = rng.randf_range(0.0, TAU)
+        add_child(plant)
+    var rock_scenes: Array[PackedScene] = [small_rock_scene, medium_rock_scene]
+    for i in range(38):
+        var x := rng.randf_range(-27.0, 27.0)
+        var z := rng.randf_range(-26.0, 24.0)
+        if Vector2(x, z).length() < 4.5 or (absf(z + 12.0) < 4.5 and absf(x) < 20.0):
+            continue
+        var rock := rock_scenes[rng.randi_range(0, rock_scenes.size() - 1)].instantiate() as Node3D
+        if rock == null:
+            continue
+        rock.position = Vector3(x, -0.02, z)
+        rock.scale = Vector3.ONE * rng.randf_range(0.8, 1.5)
+        rock.rotation.y = rng.randf_range(0.0, TAU)
+        add_child(rock)
+    if grass_scene != null:
+        for i in range(70):
+            var x := rng.randf_range(-25.0, 25.0)
+            var z := rng.randf_range(-24.0, 22.0)
+            if Vector2(x, z).length() < 4.5 or (absf(z + 12.0) < 4.3 and absf(x) < 18.0):
+                continue
+            var grass := grass_scene.instantiate() as Node3D
+            if grass == null:
+                continue
+            grass.position = Vector3(x, 0.0, z)
+            grass.scale = Vector3.ONE * rng.randf_range(0.7, 1.25)
+            grass.rotation.y = rng.randf_range(0.0, TAU)
+            add_child(grass)
 
 func make_tree(pos: Vector3, factor: float, bark: Material, leaf_mats: Array) -> void:
     var root := Node3D.new()
