@@ -411,8 +411,12 @@ func _physics_process(delta: float) -> void:
     if direction.length() > 0.08:
         player.rotation.y = lerp_angle(player.rotation.y, atan2(-direction.x, -direction.z), delta * 9.0)
     var follow_target := player.global_position + Vector3(1.6, 0, 1.0)
-    raptor.global_position = raptor.global_position.lerp(follow_target, delta * 0.7)
-    raptor.look_at(Vector3(player.global_position.x, raptor.global_position.y + 1.0, player.global_position.z), Vector3.UP)
+    var follow_direction := follow_target - raptor.global_position
+    raptor.global_position = raptor.global_position.lerp(follow_target, clampf(delta * 4.0, 0.0, 1.0))
+    if follow_direction.length() > 0.12:
+        raptor.look_at(raptor.global_position + Vector3(follow_direction.x, 0.0, follow_direction.z), Vector3.UP)
+    else:
+        raptor.look_at(Vector3(player.global_position.x, raptor.global_position.y + 0.7, player.global_position.z), Vector3.UP)
     update_camera(delta)
 
 func update_camera(delta: float) -> void:
