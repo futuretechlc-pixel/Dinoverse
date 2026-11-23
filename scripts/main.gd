@@ -153,6 +153,9 @@ func build_ruins() -> void:
     add_child(glow)
 
 func build_forest() -> void:
+    if ResourceLoader.exists("res://assets/environment/palm_tree.glb") and ResourceLoader.exists("res://assets/environment/broad_canopy_tree.glb"):
+        build_glb_forest()
+        return
     var bark := material(Color(0.18, 0.105, 0.065), 0.96)
     var leaf_mats := [
         material(Color(0.075, 0.23, 0.105), 0.88),
@@ -174,6 +177,42 @@ func build_forest() -> void:
         if Vector2(x, z).length() < 4.5 or (absf(z + 12.0) < 4.7 and absf(x) < 19.0):
             continue
         make_fern(Vector3(x, 0, z), rng.randf_range(0.65, 1.35), leaf_mats[rng.randi_range(0, 3)])
+
+func build_glb_forest() -> void:
+    var palm_scene := load("res://assets/environment/palm_tree.glb") as PackedScene
+    var canopy_scene := load("res://assets/environment/broad_canopy_tree.glb") as PackedScene
+    var sapling_scene := load("res://assets/environment/palm_sapling.glb") as PackedScene
+    var tree_scenes: Array[PackedScene] = [palm_scene, canopy_scene]
+    for i in range(42):
+        var angle := rng.randf_range(0.0, TAU)
+        var radius := rng.randf_range(12.0, 39.0)
+        var x := cos(angle) * radius
+        var z := sin(angle) * radius
+        if absf(z + 12.0) < 6.2 and absf(x) < 20.0:
+            continue
+        var source: PackedScene = tree_scenes[rng.randi_range(0, tree_scenes.size() - 1)]
+        var tree := source.instantiate() as Node3D
+        if tree == null:
+            continue
+        tree.name = "EmeraldJungle_ProductionTree_%02d" % i
+        tree.position = Vector3(x, 0.0, z)
+        tree.scale = Vector3.ONE * rng.randf_range(0.78, 1.22)
+        tree.rotation.y = rng.randf_range(0.0, TAU)
+        add_child(tree)
+    if sapling_scene != null:
+        for i in range(26):
+            var x := rng.randf_range(-25.0, 25.0)
+            var z := rng.randf_range(-24.0, 22.0)
+            if Vector2(x, z).length() < 5.0 or (absf(z + 12.0) < 5.0 and absf(x) < 18.0):
+                continue
+            var sapling := sapling_scene.instantiate() as Node3D
+            if sapling == null:
+                continue
+            sapling.name = "EmeraldJungle_Understory_%02d" % i
+            sapling.position = Vector3(x, 0.0, z)
+            sapling.scale = Vector3.ONE * rng.randf_range(0.75, 1.35)
+            sapling.rotation.y = rng.randf_range(0.0, TAU)
+            add_child(sapling)
 
 func make_tree(pos: Vector3, factor: float, bark: Material, leaf_mats: Array) -> void:
     var root := Node3D.new()
