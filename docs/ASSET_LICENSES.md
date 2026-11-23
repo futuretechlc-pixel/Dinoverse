@@ -7,11 +7,11 @@ The asset bootstrap script downloads four GLB files from Polyfork's public CDN:
 | `assets/characters/velociraptor_base.glb` | Velociraptor | https://polyfork.dev/asset/velociraptor-base | 3,938 triangles, one material, named articulated pivots |
 | `assets/environment/palm_tree.glb` | Palm Tree | https://polyfork.dev/asset/palm-tree-a307da | 645 triangles, tropical canopy silhouette |
 | `assets/environment/palm_sapling.glb` | Palm Sapling | https://polyfork.dev/asset/palm-sapling-ef7ae4 | 599 triangles, foreground / understory prop |
-| `assets/environment/broad_canopy_tree.glb` | Broad Canopy Shade Tree | https://polyfork.dev/asset/broad-canopy-shade-tree-e7c4a2 | 394 triangles, large canopy silhouette |
+| `assets/environment/broad_canopy_tree.glb` | Broad Canopy Shade Tree | https://polyfork.dev/asset/broad-canopy-shade-tree-e7c4a2 | 394 triangles, large canopy silhouette |\n| `assets/environment/fern.glb` | Fern Plant | https://polyfork.dev/asset/fern-plant-1559b8 | 626 triangles, understory foliage |\n| `assets/environment/round_bush.glb` | Round Bush | https://polyfork.dev/asset/round-bush-cd2ac0 | 512 triangles, low shrubs |\n| `assets/environment/small_rock.glb` | Small Rock | https://polyfork.dev/asset/small-rock-db33a7 | 202 triangles, shoreline scatter |\n| `assets/environment/medium_rock.glb` | Medium Rock | https://polyfork.dev/asset/medium-rock-e08405 | 173 triangles, larger ground scatter |\n| `assets/environment/grass_tuft.glb` | Grass Tuft | https://polyfork.dev/asset/grass-tuft-a40a08 | 368 triangles, ground cover |
 
 Polyfork states that its assets may be used commercially in games and apps without attribution. The free mesh files are also available under CC BY 4.0 when the raw mesh itself is shared or redistributed. Retain this credit when distributing the source meshes:
 
-- **Velociraptor**, **Palm Tree**, **Palm Sapling**, and **Broad Canopy Shade Tree** by Polyfork, https://polyfork.dev, CC BY 4.0 for shared mesh files.
+- **Velociraptor**, **Palm Tree**, **Palm Sapling**, **Broad Canopy Shade Tree**, **Fern Plant**, **Round Bush**, **Small Rock**, **Medium Rock**, and **Grass Tuft** by Polyfork, https://polyfork.dev, CC BY 4.0 for shared mesh files.
 - License reference: https://polyfork.dev/asset/velociraptor-base and https://polyfork.dev/ (licensing FAQ).
 
 Do not resell the raw files as standalone assets or redistribute Polyfork `.mjs` source programs. The bootstrap downloads only the GLB mesh files.
