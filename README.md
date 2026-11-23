@@ -26,7 +26,7 @@ The bootstrap sources are free for commercial game use. Read `docs/ASSET_LICENSE
 - Real GLB Velociraptor mesh with 3,938 triangles and named articulated pivots.
 - Runtime controller blends idle, walk, and run motion through the model's neck, head, jaw, tail, arms, and hind-leg pivots.
 - Bite, roar, and hit action hooks are available to gameplay code.
-- Tropical GLB environment assets are fetched by the same bootstrap script and scattered through Emerald Jungle.
+- Tropical GLB trees, ferns, shrubs, rocks, and ground-cover assets are fetched by the same bootstrap script and scattered through Emerald Jungle.
 - Existing Godot environment, water shader, ruins, camera, and explorer foundation remain in place.
 
 ## Important quality boundary
