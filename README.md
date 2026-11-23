@@ -31,7 +31,7 @@ The bootstrap sources are free for commercial game use. Read `docs/ASSET_LICENSE
 
 ## Important quality boundary
 
-The downloaded Velociraptor is a lightweight stylized gameplay asset, not a cinematic hero model. Its parts are articulated pivots rather than a skinned deformation skeleton, and the current animation controller is procedural. It replaces the primitive placeholder, but it does **not** yet satisfy the final hero-character gate for authored skeletal animation, secondary motion, and high-detail close-up presentation. That remaining gate is documented in `docs/ART_QUALITY_GATE.md`.
+The downloaded Velociraptor is a lightweight stylized gameplay asset, not a cinematic hero model. Its parts are articulated pivots rather than a skinned deformation skeleton, and the current animation controller is procedural. It replaces the primitive placeholder, but it does **not** yet satisfy the final hero-character gate for authored skeletal animation, secondary motion, and high-detail close-up presentation. That remaining gate is documented in `docs/ART_QUALITY_GATE.md` and the exact hero model / rig / animation brief is in `docs/HIGH_END_ART_PIPELINE.md`.
 
 ## Validation
 
