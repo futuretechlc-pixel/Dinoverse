@@ -35,4 +35,4 @@ The downloaded Velociraptor is a lightweight stylized gameplay asset, not a cine
 
 ## Validation
 
-The GitHub Actions workflow **Dinoverse Visual Gate** downloads the GLB assets, imports the project in Godot 4.7.1 headless mode, runs a startup smoke test, and packages the project as an artifact. A workflow pass is the first actual engine-side validation; local source edits alone are not treated as a successful build.
+The GitHub Actions workflow **Dinoverse Visual Gate** downloads the GLB assets, imports the project in Godot 4.7.1 headless mode, runs a startup smoke test, and uploads a validation report without redistributing the source meshes. A workflow pass is the first actual engine-side validation; local source edits alone are not treated as a successful build.
