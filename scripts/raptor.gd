@@ -70,6 +70,7 @@ func _process(delta: float) -> void:
     set_rotation_offset("Tail", Vector3(0.015 + gait * move_amount * 0.025, sin(clock * 1.1) * 0.105 - gait * move_amount * 0.10, 0.0))
     set_rotation_offset("TailMid", Vector3(0.0, sin(clock * 1.1 - 0.35) * 0.075 - gait * move_amount * 0.065, 0.0))
     set_rotation_offset("TailTip", Vector3(0.0, sin(clock * 1.1 - 0.7) * 0.09 - gait * move_amount * 0.04, 0.0))
+    set_rotation_offset("Jaw", Vector3.ZERO)
 
     animate_leg("Left", gait, stride_amount, knee_amount)
     animate_leg("Right", -gait, stride_amount, knee_amount)
